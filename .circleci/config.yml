@@ -57,7 +57,7 @@ jobs:
             docker build -t testimg:latest .
             curl -sL https://github.com/arminc/clair-scanner/releases/download/v6/clair-scanner_linux_amd64 -o clair-scanner
             chmod +x clair-scanner
-            ./clair-scanner --clair=${CLAIR} --ip $(hostname -i) testimg:latest
+            ./clair-scanner -c http://docker:6060 --ip $(hostname -i) testimg:latest
 
       - store_artifacts:
           path: test-reports
