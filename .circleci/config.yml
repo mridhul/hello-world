@@ -49,7 +49,7 @@ jobs:
           command: |
             . venv/bin/activate
             python manage.py test
-      - scanning
+      - scanning:
           name: vuln scanning
           command: |
             docker build -t testimg:latest .
