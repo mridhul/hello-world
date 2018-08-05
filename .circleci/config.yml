@@ -20,6 +20,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
+          version: 17.11.0-ce
           docker_layer_caching: true
 
       # Download and cache dependencies
