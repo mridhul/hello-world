@@ -55,6 +55,8 @@ jobs:
           name: Build Image
           command: |
             docker build -t testimg:latest .
+      - store_artifacts:
+          path: /pushed_images.txt
       - run:
           name: Check for docker vulnerabilities
           command: |
