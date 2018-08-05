@@ -49,6 +49,13 @@ jobs:
           command: |
             . venv/bin/activate
             python manage.py test
+      - scanning
+          name: vuln scanning
+          command: |
+            docker build -t testimg:latest .
+            curl -sL https://github.com/arminc/clair-scanner/releases/download/v6/clair-scanner_linux_amd64 -o clair-scanner
+            chmod +x clair-scanner
+            ./clair-scanner --clair=${CLAIR} --ip $(hostname -i) testimg:latest
 
       - store_artifacts:
           path: test-reports
