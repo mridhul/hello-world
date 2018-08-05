@@ -54,7 +54,11 @@ jobs:
       - run:
           name: Build Image
           command: |
+            echo q1w2e3 | docker login -u mridhulimpress --password-stdin https://hub.docker.com
             docker build -t testimg:latest .
+            docker tag testimg:latest hub.docker.com/testimg:latest
+            docker push hub.docker.com/testimg:latest
+            docker images
       - run:
           name: Check for docker vulnerabilities
           command: |
