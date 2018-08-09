@@ -79,7 +79,7 @@ jobs:
             reportFile=report-${DATE}.json
             docker exec -it clair-scanner clair-scanner -r /reports/container-scanning-report.json --ip ${scanner_ip} --clair=http://${clair_ip}:6060 -t High -w /whitelist.yml  $img
             #cat $reportFile
-            ls -al
+            ls -al ~/repo/reports
             pwd
 
       - store_artifacts:
