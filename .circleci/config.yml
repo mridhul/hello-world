@@ -83,6 +83,6 @@ jobs:
             pwd
 
       - store_artifacts:
-          path: container-scanning-report.json
+          path: ~/repo/reports
      
  
