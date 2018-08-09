@@ -65,8 +65,8 @@ jobs:
           command: |
             docker run -p 5432:5432 -d --name db arminc/clair-db:latest
             docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-scan:v2.0.1
-            mkdir /reports
-            docker run -v /var/run/docker.sock:/var/run/docker.sock -v /reports:/reports -d --name clair-scanner cplee/clair-scanner:latest tail -f /dev/null
+            mkdir ~/repo/reports
+            docker run -v /var/run/docker.sock:/var/run/docker.sock -v ~/repo/reports:/reports -d --name clair-scanner cplee/clair-scanner:latest tail -f /dev/null
             clair_ip=`docker exec -it clair hostname -i | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+'`
             scanner_ip=`docker exec -it clair-scanner hostname -i | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+'`
             img=ubuntu:latest
@@ -77,7 +77,7 @@ jobs:
             docker cp .circleci/whitelist.yml clair-scanner:/whitelist.yml 
             DATE=`date '+%Y-%m-%d-%H-%M-%S'`
             reportFile=report-${DATE}.json
-            docker exec -it clair-scanner clair-scanner -l /tmp/log.txt -r /tmp/container-scanning-report.json --ip ${scanner_ip} --clair=http://${clair_ip}:6060 -t High -w /whitelist.yml  $img
+            docker exec -it clair-scanner clair-scanner -r /reports/container-scanning-report.json --ip ${scanner_ip} --clair=http://${clair_ip}:6060 -t High -w /whitelist.yml  $img
             #cat $reportFile
             ls -al
             pwd
