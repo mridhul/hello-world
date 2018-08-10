@@ -76,9 +76,9 @@ jobs:
             docker pull $img
             docker cp .circleci/whitelist.yml clair-scanner:/whitelist.yml 
             DATE=`date '+%Y-%m-%d-%H-%M-%S'`
-            reportFile=report-${DATE}.json
-            docker exec -it clair-scanner clair-scanner -r /tmp/container-scanning-report.json --ip ${scanner_ip} --clair=http://${clair_ip}:6060 -t High -w /whitelist.yml  $img
-            docker cp clair-scanner:/tmp/container-scanning-report.json ~/repo/reports
+            reportFile=container-scanning-report-$DATE.json
+            docker exec -it clair-scanner clair-scanner -r /tmp/$reportFile --ip ${scanner_ip} --clair=http://${clair_ip}:6060 -t High -w /whitelist.yml  $img
+            docker cp clair-scanner:/tmp/$reportFile ~/repo/reports
             ls -al ~/repo/reports
 
       - store_artifacts:
