@@ -80,6 +80,7 @@ jobs:
             docker exec -it clair-scanner clair-scanner -r /tmp/$reportFile --ip ${scanner_ip} --clair=http://${clair_ip}:6060 -t High -w /whitelist.yml  $img
             docker cp clair-scanner:/tmp/$reportFile ~/repo/reports
             ls -al ~/repo/reports
+            pip install slackclient
             python .circleci/tools/slack.py
 
       - store_artifacts:
