@@ -9,14 +9,6 @@ def slack_message(message, channel):
   token = 'xoxb-412432026433-414214512930-t0y3tau1n0IrMLTmhE43Qtjx'
   sc = SlackClient(token)
   filename='/home/circleci/repo/reports/'+attachment
-  with open(filename, 'rb') as f:
-   sc.api_call(
-          "files.upload",
-          channels=channel,
-          filename=filename,
-          title='scanout',
-          initial_comment='vuln scanning',
-          file=io.BytesIO(f.read())
-      )
+  sc.api_call("files.upload", filename=filename, channels=channel, file= io.BytesIO(str.encode(content)))
                       
 slack_message("Hey","devopsifly")
