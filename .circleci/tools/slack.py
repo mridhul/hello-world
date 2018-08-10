@@ -17,7 +17,7 @@ def slack_message(message, channel):
         initial_comment='vuln scanning',
         file=io.BytesIO(f.read())
     )
-    sc.api_call('chat.postMessage', channel=channel, 
+   sc.api_call('chat.postMessage', channel=channel, 
                 text=message, username='vuln-scan',
                 icon_emoji=':robot_face:')
                 
