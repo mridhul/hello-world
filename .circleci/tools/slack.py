@@ -19,9 +19,9 @@ def getSummary(reportFile):
      for item in data['vulnerabilities']:
       v_list.append(item['severity'])
 
- mediumCount= Counter(v_list)['Medium']
- highCount= Counter(v_list)['High']
- lowCount= Counter(v_list)['Low']
+  mediumCount= Counter(v_list)['Medium']
+  highCount= Counter(v_list)['High']
+  lowCount= Counter(v_list)['Low']
 
  return('Summary : High - {}, Medium - {}, Low - {}'.format(highCount,mediumCount,lowCount))
   
