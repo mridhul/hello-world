@@ -13,17 +13,17 @@ def getSummary(reportFile):
   Returns Summary stats to be posted to the slack room
   Arg - Vunerablity Scan Json File
   '''
+  
   v_list=[]
   with open(reportFile) as json_data:
-     data = json.load(json_data)
-     for item in data['vulnerabilities']:
-      v_list.append(item['severity'])
+    data = json.load(json_data)
+    for item in data['vulnerabilities']:
+        v_list.append(item['severity'])
 
   mediumCount= Counter(v_list)['Medium']
   highCount= Counter(v_list)['High']
   lowCount= Counter(v_list)['Low']
-
- return('Summary : High - {}, Medium - {}, Low - {}'.format(highCount,mediumCount,lowCount))
+  return('Summary : High - {}, Medium - {}, Low - {}'.format(highCount,mediumCount,lowCount))
   
 
 def slack_message(message, channel):
