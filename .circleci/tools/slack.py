@@ -38,7 +38,7 @@ def slack_message(message, channel):
         channels=channel,
         filename=reportFile,
         title=summary,
-        initial_comment='Please expand..',
+        initial_comment=summary,
         file=io.BytesIO(f.read())
     )
                       
