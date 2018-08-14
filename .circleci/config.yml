@@ -74,7 +74,11 @@ jobs:
             echo "clair_ip = $clair_ip"
             echo "scanner_ip = $scanner_ip"
             docker pull $img
-            docker cp .circleci/whitelist.yml clair-scanner:/whitelist.yml 
+            docker cp .circleci/whitelist.yml clair-scanner:/whitelist.yml
+            
+            docker cp .circleci/glibc.sh clair-scanner:/glibc.sh
+            docker exec -it clair-scanner ./glibc.sh $img
+            
             DATE=`date '+%Y-%m-%d-%H-%M-%S'`
             reportFile=container-scanning-report-$DATE.json
             docker exec -it clair-scanner clair-scanner -r /tmp/$reportFile --ip ${scanner_ip} --clair=http://${clair_ip}:6060 -t High -w /whitelist.yml  $img
