@@ -69,7 +69,7 @@ jobs:
             docker run -v /var/run/docker.sock:/var/run/docker.sock -d --name clair-scanner cplee/clair-scanner:latest tail -f /dev/null
             clair_ip=`docker exec -it clair hostname -i | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+'`
             scanner_ip=`docker exec -it clair-scanner hostname -i | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+'`
-            img=ubuntu:latest
+            img=alpine:latest
             echo "img = $img"
             echo "clair_ip = $clair_ip"
             echo "scanner_ip = $scanner_ip"
