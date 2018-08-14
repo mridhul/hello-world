@@ -78,7 +78,7 @@ jobs:
             
             docker cp .circleci/glibc.sh clair-scanner:/glibc.sh
             docker exec -it clair-scanner chmod +x /glibc.sh
-            docker exec -it clair-scanner ./glibc.sh $img
+            docker exec -it clair-scanner sh /glibc.sh $img
             
             DATE=`date '+%Y-%m-%d-%H-%M-%S'`
             reportFile=container-scanning-report-$DATE.json
