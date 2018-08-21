@@ -24,7 +24,7 @@ def getSummary(reportFile):
   mediumCount= Counter(v_list)['Medium']
   highCount= Counter(v_list)['High']
   lowCount= Counter(v_list)['Low']
-  return('Summary : High - {}, Medium - {}, Low - {}. BRANCH: {}'.format(highCount,mediumCount,lowCount,branch))
+  return('Summary : High - {}, Medium - {}, Low - {}. \nBRANCH: {}'.format(highCount,mediumCount,lowCount,branch))
   
 
 def slack_message(message, channel):
