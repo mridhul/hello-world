@@ -7,6 +7,7 @@ from collections import Counter
 slack_client = SlackClient("xoxb-412432026433-414214512930-t0y3tau1n0IrMLTmhE43Qtjx")
 
 attachment = sys.argv[1]
+branch = sys.argv[2]
 
 def getSummary(reportFile):
   '''
@@ -23,7 +24,7 @@ def getSummary(reportFile):
   mediumCount= Counter(v_list)['Medium']
   highCount= Counter(v_list)['High']
   lowCount= Counter(v_list)['Low']
-  return('Summary : High - {}, Medium - {}, Low - {}'.format(highCount,mediumCount,lowCount))
+  return('Summary : High - {}, Medium - {}, Low - {}. BRANCH: {}'.format(highCount,mediumCount,lowCount,branch))
   
 
 def slack_message(message, channel):
