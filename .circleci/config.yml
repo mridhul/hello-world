@@ -86,7 +86,7 @@ jobs:
             docker cp clair-scanner:/tmp/$reportFile ~/repo/reports
             ls -al ~/repo/reports
             . venv/bin/activate
-            python .circleci/tools/slack.py $reportFile
+            python .circleci/tools/slack.py $reportFile $CIRCLE_BRANCH
 
       - store_artifacts:
           path: ~/repo/reports
