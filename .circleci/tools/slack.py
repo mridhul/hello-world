@@ -3,11 +3,19 @@ import sys
 import io
 import json
 from collections import Counter
+import os
  
 slack_client = SlackClient("xoxb-412432026433-414214512930-t0y3tau1n0IrMLTmhE43Qtjx")
 
 attachment = sys.argv[1]
 branch = sys.argv[2]
+
+def env(key, default=None):
+    try:
+        return os.environ[key]
+    except KeyError:
+        if default is not None:
+            return default
 
 def getSummary(reportFile):
   '''
@@ -41,6 +49,14 @@ def slack_message(message, channel):
         title=summary,
         initial_comment=summary,
         file=io.BytesIO(f.read())
+    )
+    
+    msg='Something went wrong on Deployment #{} . \n Branch: {} \n URL: {}'.format(env('CIRCLE_BUILD_NUM'),env('CIRCLE_BRANCH'),env('CIRCLE_BUILD_URL'))
+    sc.api_call(
+        "chat.postMessage",
+        channel=channel,
+        text=msg,
+        as_user=True
     )
                       
 slack_message("Hey","devopsifly")
